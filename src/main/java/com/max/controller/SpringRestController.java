@@ -25,7 +25,7 @@ public class SpringRestController {
         return service.getAllUsers();
 	}
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, headers = "Content-Type=application/json")
     public User createUser(@RequestBody User user) {
         System.out.println(user.toString() + "\n end");
         return user;
