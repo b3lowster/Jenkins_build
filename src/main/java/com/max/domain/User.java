@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private List<Address> addresses;
     private List<Long> accounts;
 
     public int getUserid() {
@@ -45,6 +46,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
     public List<Long> getAccounts() {
         return accounts;
     }
@@ -57,16 +66,31 @@ public class User implements Serializable {
     public String toString() {
         return "User [userid=" + userid + ", firstName=" + firstName
                 + ", lastName=" + lastName + ", email="
-                + email + ", accounts' list size is = " + (accounts != null ? accounts.size() : "null") +
+                + email +
+                ", addresses' list size is = " + (addresses != null ? addresses.size() : "null") +
+                " " + (addresses != null ? getAddressesString(addresses) : "") +"]" +
+                ", accounts' list size is = " + (accounts != null ? accounts.size() : "null") +
                 " " + (accounts != null ? getAccountString(accounts) : "") +"]";
     }
 
     private String getAccountString(List<Long> accounts) {
-        StringBuilder sb = new StringBuilder("[");
+        StringBuilder sb = new StringBuilder("Accounts [");
         if (accounts != null) {
             for (Long account : accounts) {
                 sb.append(String.valueOf(account))
-                .append("]");
+                .append(",");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    private String getAddressesString(List <Address> addresses) {
+        StringBuilder sb = new StringBuilder("Addresses [");
+        if (accounts != null) {
+            for (Address address : addresses) {
+                sb.append(address.toString())
+                        .append(",");
             }
         }
         sb.append("]");
